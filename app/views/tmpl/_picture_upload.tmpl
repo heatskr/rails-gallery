@@ -1,0 +1,37 @@
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+<div class="col-sm-6 col-md-3 template-upload fade">
+  <div class="thumbnail">
+
+    <div style="background-color: #eee; height: 180px; padding-top: 24px">
+      <div class="preview">
+        <span class="fade"></span>
+      </div>
+      <div>
+        <span>{%=o.formatFileSize(file.size)%}</span>
+      </div>
+    </div>
+
+    <div class="progress progress-success progress-striped active">
+      <div class="bar" style="width:0%;"></div>
+    </div>
+
+
+    <div class="caption">
+      <span class="start">{% if (!o.options.autoUpload) { %}
+        <button class="btn btn-primary">
+          <i class="glyphicon glyphicon-upload"></i>
+          <span>{%=locale.fileupload.start%}</span>
+        </button>
+      {% } %}</span>
+
+      <span class="cancel">{% if (!i) { %}
+        <button class="btn btn-warning">
+          <i class="glyphicon glyphicon-ban-circle"></i>
+          <span>{%=locale.fileupload.cancel%}</span>
+        </button>
+      {% } %}</span>
+    </div>
+
+  </div>
+</div>
+{% } %}

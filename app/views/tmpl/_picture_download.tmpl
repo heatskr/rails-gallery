@@ -1,0 +1,27 @@
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+<div class="col-sm-6 col-md-3 template-download fade">
+  <div class="thumbnail">
+    <a data-toggle="lightbox" href="{%=file.url%}" class="picture"
+       data-title="{%=file.title%}" data-footer="{%=file.description%}"
+       data-gallery="album" data-parent="#album-pictures-list"
+       data-picture-id="{%=file.id%}">
+      <img alt="" src="{%=file.thumbnail_url%}" class="ïmage-responsive"/>
+    </a>
+    <div class="caption">
+      <p class="delete">
+        <a href="{%=file.delete_url%}" class="btn btn-default btn-edit-picture"
+           role="button">
+          <i class="glyphicon glyphicon-pencil"></i>
+          Edit
+        </a>
+        <button class="btn btn-danger" data-type="{%=file.delete_type%}"
+          data-url="{%=file.delete_url%}">
+          <i class="glyphicon glyphicon-trash"></i>
+          <span>{%=locale.fileupload.destroy%}</span>
+        </button>
+        <input type="checkbox" name="delete" value="1"/>
+      </p>
+    </div>
+  </div>
+</div>
+{% } %}

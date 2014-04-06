@@ -1,0 +1,119 @@
+<%= form_for [@album, @album.pictures.new], :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1>
+      <%= @album.title %>
+      <small><%= @album.description %></small>
+    </h1>
+  </div>
+  <div class="pull-right">
+    <%= image_tag @album.cover.thumb_64 %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="pull-left">
+      <a href="<%= albums_path %>" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Back
+      </a>
+      <a href="<%= edit_album_path @album %>" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit Album
+      </a>
+      <a href="<%= album_path @album %>" data-method="delete" data-confirm="Are you sure?" rel="nofollow" class="btn btn-default">
+        <span class="glyphicon glyphicon-trash"></span>
+        Delete Album
+      </a>
+    </div>
+    <div class="pull-right">
+      <!-- Redirect browsers with JavaScript disabled to the origin page -->
+      <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
+      <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+      <div class="row fileupload-buttonbar">
+        <div class="span7">
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+            <%= f.file_field :image, multiple: true, id: 'upload-field' %>
+            <%= f.hidden_field :album_id, value: @album.id %>
+          </span>
+          <button type="submit" class="btn btn-primary start">
+            <i class="glyphicon glyphicon-upload"></i>
+            <span>Start upload</span>
+          </button>
+          <button type="reset" class="btn btn-warning cancel">
+            <i class="glyphicon glyphicon-ban-circle"></i>
+            <span>Cancel upload</span>
+          </button>
+          <button type="button" class="btn btn-danger delete">
+            <i class="glyphicon glyphicon-trash"></i>
+            <span>Delete</span>
+          </button>
+          <input type="checkbox" class="toggle">
+          <!-- The loading indicator is shown during file processing -->
+          <span class="fileupload-loading"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<!-- The global progress information -->
+<div class="span5 fileupload-progress fade">
+  <!-- The global progress bar -->
+  <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+    <div class="bar" style="width:0%;"></div>
+  </div>
+  <!-- The extended global progress information -->
+  <div class="progress-extended">&nbsp;</div>
+</div>
+
+<div role="presentation" id="album-pictures-list" class="row files"></div>
+
+<% end %>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+<%= render 'tmpl/picture_upload.tmpl' %>
+</script>
+
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+<%= render 'tmpl/picture_download.tmpl' %>
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-picture" tabindex="-1" role="dialog" aria-labelledby="modal-picture-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-picture-label">Edit Picture</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for [@album, @album.pictures.new] do |f| %>
+          <div>
+            <%= f.label :title %><br/>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+          <div>
+            <%= f.label :description %><br/>
+            <%= f.text_field :description, class: 'form-control' %>
+            <input type="hidden" name="_method" value="put"/>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
