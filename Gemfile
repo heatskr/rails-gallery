@@ -47,3 +47,5 @@ end
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'jquery-fileupload-rails'
+
+gem 'bootstrap-sass'
