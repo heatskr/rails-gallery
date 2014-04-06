@@ -27,3 +27,6 @@ Thumbs.db
 
 # RVM
 .versions.conf
+
+# Uploads directory
+public/uploads
