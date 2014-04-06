@@ -1,5 +1,13 @@
-<h1>New album</h1>
+<div class="page-header clearfix">
+  <div class="pull-left">
+    <h1>New album</h1>
+  </div>
+  <div class="pull-right btn-header">
+    <a href="<%= albums_path %>" class="btn btn-default">
+      <span class="glyphicon glyphicon-arrow-left"></span>
+      Back
+    </a>
+  </div>
+</div>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', albums_path %>
