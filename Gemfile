@@ -43,3 +43,7 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'jquery-fileupload-rails'
